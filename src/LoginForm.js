@@ -1,18 +1,45 @@
 import React, { Component } from 'react';
 import {
-    Grid,
-    Navbar,
-    Jumbotron,
-    Button, FormGroup,
+    FormGroup,
     ControlLabel,
     FormControl,
     HelpBlock,
-    Checkbox,
-    Radio,
+    Button,
     Alert,
 } from 'react-bootstrap';
 
+import 'rxjs/add/operator/map';
+
+import Api from './Api';
+
 class LoginForm extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleEmailChange = this._handleEmailChange.bind(this);
+        this.handlePasswordChange = this._handlePasswordChange.bind(this);
+        this.login = this._login.bind(this);
+    }
+
+    _handleEmailChange(event) {
+        this.email = event.target.value;
+    }
+
+    _handlePasswordChange(event) {
+        this.password = event.target.value;
+    }
+
+    _login(event) {
+        event.preventDefault();
+
+        Api.plex.login(this.email, this.password)
+            .map(it => it.user.authToken)
+            .subscribe({
+                next: it => console.log(it),
+                error: it => console.error(it)
+            })
+    }
+
     render() {
         function FieldGroup({ id, label, help, ...props }) {
             return (
@@ -27,16 +54,18 @@ class LoginForm extends Component {
         return (
             <form>
                 <FieldGroup
+                    onChange={this.handleEmailChange}
                     id="formControlsEmail"
                     type="email"
                     label="Email address"
                     placeholder="Enter email" />
                 <FieldGroup
+                    onChange={this.handlePasswordChange}
                     id="formControlsPassword"
                     label="Password"
                     type="password" />
 
-                <Button type="submit">
+                <Button type="submit" onClick={this.login}>
                     Submit
                 </Button>
 
