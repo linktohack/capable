@@ -85,7 +85,7 @@ store.map(it => it.selectedLibrary)
                         format: 'srt',
                         language: it.$.language || 'Unknown',
                         languageCode: it.$.languageCode || 'Unknown',
-                        url: `https://vtt.hyrule.me/srt?hash=${btoa(`${store.value.selectedResource}${it.$.key}?X-Plex-Token=${store.value.token}`)}`
+                        url: `https://vtt.linktohack.com/srt?hash=${btoa(`${store.value.selectedResource}${it.$.key}?X-Plex-Token=${store.value.token}`)}`
                     }));
                 const ass = it.Stream
                     .filter(it => it.$.streamType === "3" && it.$.format === "ass")
@@ -93,7 +93,7 @@ store.map(it => it.selectedLibrary)
                         format: 'srt',
                         language: it.$.language || 'Unknown',
                         languageCode: it.$.languageCode || 'Unknown',
-                        url: `https://vtt.hyrule.me/ass?hash=${btoa(`${store.value.selectedResource}${it.$.key}?X-Plex-Token=${store.value.token}`)}`
+                        url: `https://vtt.linktohack.com/ass?hash=${btoa(`${store.value.selectedResource}${it.$.key}?X-Plex-Token=${store.value.token}`)}`
                     }));
                 return {video, subtitles: [].concat(srt, ass), thumb, poster};
             })
