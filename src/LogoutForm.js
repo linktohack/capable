@@ -1,14 +1,23 @@
-import React, { Component } from 'react';
-import {
-    Button,
-    Alert
-} from 'react-bootstrap';
+import React, {Component} from "react";
+import {Alert, Button} from "react-bootstrap";
+
+import Api from "./Api";
 
 class LogoutForm extends Component {
+    constructor(props) {
+        super(props);
+
+        this.logout = this._logout.bind(this);
+    }
+
+    _logout() {
+        Api.plex.logout()
+    }
+
     render() {
         return (
             <form>
-                <Button type="submit">
+                <Button type="submit" onClick={this.logout}>
                     Log out
                 </Button>
 

@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
-import {
-    FormGroup,
-    ControlLabel,
-    FormControl,
-    HelpBlock,
-    Button,
-    Alert,
-} from 'react-bootstrap';
+import React, {Component} from "react";
+import {Alert, Button, ControlLabel, FormControl, FormGroup, HelpBlock} from "react-bootstrap";
 
-import 'rxjs/add/operator/map';
+import "rxjs/add/operator/map";
+import u from "updeep";
 
-import Api from './Api';
+import Api from "./Api";
+import store from "./store";
 
 class LoginForm extends Component {
     constructor(props) {
@@ -34,14 +29,16 @@ class LoginForm extends Component {
 
         Api.plex.login(this.email, this.password)
             .map(it => it.user.authToken)
-            .subscribe({
-                next: it => console.log(it),
-                error: it => console.error(it)
-            })
+            .subscribe(token => {
+                    store.next(u({token: token}, store.value));
+                    Api.plex.token(token);
+                },
+                it => console.error(it)
+            )
     }
 
     render() {
-        function FieldGroup({ id, label, help, ...props }) {
+        function FieldGroup({id, label, help, ...props}) {
             return (
                 <FormGroup controlId={id}>
                     <ControlLabel>{label}</ControlLabel>
@@ -58,12 +55,12 @@ class LoginForm extends Component {
                     id="formControlsEmail"
                     type="email"
                     label="Email address"
-                    placeholder="Enter email" />
+                    placeholder="Enter email"/>
                 <FieldGroup
                     onChange={this.handlePasswordChange}
                     id="formControlsPassword"
                     label="Password"
-                    type="password" />
+                    type="password"/>
 
                 <Button type="submit" onClick={this.login}>
                     Submit

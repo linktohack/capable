@@ -1,16 +1,11 @@
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import u from 'updeep';
-
-import Api from './Api';
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 const store = new BehaviorSubject({
     token: undefined,
-    hosts: [],
-    selectedHost: undefined,
+    resources: [],
+    selectedResource: undefined,
     libraries: [],
-    selectedLibrary: undefined,    
-})
-
-store.next(u({token: Api.plex.token()}), store.getValue())
+    selectedLibrary: undefined,
+});
 
 export default store;
