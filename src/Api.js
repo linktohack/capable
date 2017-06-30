@@ -54,6 +54,21 @@ const Api = {
 
             return Observable.fromPromise(fetch(url, settings).then(it => it.text()))
                 .flatMap(it => parseXml(it));
+        },
+
+        libraries(baseUrl) {
+            const url = `${baseUrl}/library/sections/1/all`;
+
+            const settings = {
+                "crossDomain": true,
+                "method": "GET",
+                "headers": {
+                    "x-plex-token": this.token()
+                }
+            };
+
+            return Observable.fromPromise(fetch(url, settings).then(it => it.text()))
+                .flatMap(it => parseXml(it));
         }
     }
 };

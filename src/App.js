@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Col, Grid, Row} from "react-bootstrap";
-import ResourcesList from "./ResourcesList";
 
 import u from "updeep";
 
@@ -12,34 +11,15 @@ import "rxjs/add/operator/distinctUntilChanged";
 
 import LoginForm from "./LoginForm";
 import LogoutForm from "./LogoutForm";
+import ResourcesList from "./ResourcesList";
+import LibrariesList from "./LibrariesList";
 
 import Api from "./Api";
 import store from "./store";
 
+store.subscribe(it => console.log('store', it));
+
 store.next(u({token: Api.plex.token()}, store.value));
-
-store.map(it => it.token)
-    .distinctUntilChanged()
-    .subscribe(token => {
-        if (!token) {
-            return
-        }
-
-        Api.plex.resources()
-            .map(it => it.MediaContainer.Device
-                .filter(it => it.$.provides === 'server')
-                .map(it => {
-                    const conn = it.Connection.find(it => it.$.local === "0");
-                    return {
-                        name: it.$.name,
-                        url: conn.$.uri
-                    }
-                }))
-            .do(it => console.log('resources', it))
-            .subscribe(resources => {
-                store.next(u({resources: resources}, store.value));
-            });
-    });
 
 class App extends Component {
     composite = undefined;
@@ -84,6 +64,9 @@ class App extends Component {
                     </Col>
                     <Col xs={3}>
                         <ResourcesList/>
+                    </Col>
+                    <Col xs={3}>
+                        <LibrariesList/>
                     </Col>
                 </Row>
             </Grid>
