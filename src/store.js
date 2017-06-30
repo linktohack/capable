@@ -16,8 +16,7 @@ const store = new BehaviorSubject({
     selectedResource: undefined,
     libraries: [],
     selectedLibrary: undefined,
-    tracks: {},
-    selectedSubtitle: undefined
+    tracks: {}
 });
 
 store.map(it => it.token)
@@ -76,9 +75,10 @@ store.map(it => it.selectedLibrary)
             .map(it => it.MediaContainer.Video[0].Media[0].Part[0])
             .map(it => {
                 const video = {
-                    url: `${store.value.selectedResource}${it.$.key}`
+                    url: `${store.value.selectedResource}${it.$.key}?X-Plex-Token=${store.value.token}`
                 };
                 const thumb = it.$.thumb;
+                const poster = it.$.art;
                 const srt = it.Stream
                     .filter(it => it.$.streamType === "3" && it.$.format === "srt")
                     .map(it => ({
@@ -95,11 +95,11 @@ store.map(it => it.selectedLibrary)
                         languageCode: it.$.languageCode || 'Unknown',
                         url: `https://vtt.hyrule.me/ass?hash=${btoa(`${store.value.selectedResource}${it.$.key}?X-Plex-Token=${store.value.token}`)}`
                     }));
-                return {video, thumb, subtitles: [].concat(srt, ass)};
+                return {video, subtitles: [].concat(srt, ass), thumb, poster};
             })
             .do(it => console.log('track', it))
             .subscribe(tracks => {
-                store.next(u({tracks}, store.value));
+                store.next(u({tracks: u.constant(tracks)}, store.value));
             });
     });
 

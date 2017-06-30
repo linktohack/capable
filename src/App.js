@@ -16,7 +16,7 @@ import LibrariesList from "./LibrariesList";
 
 import Api from "./Api";
 import store from "./store";
-import TracksList from "./TracksList";
+import VideoPlayer from "./VideoPlayer";
 
 store.subscribe(it => console.log('store', it));
 
@@ -71,10 +71,8 @@ class App extends Component {
                     <Col xs={3}>
                         <LibrariesList/>
                     </Col>
-                    <Col xs={3}>
-                        <TracksList/>
-                    </Col>
-                    <Col xs={3}>
+                    <Col xs={6}>
+                        <VideoPlayer/>
                     </Col>
                 </Row>
             </Grid>
