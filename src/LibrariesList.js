@@ -16,11 +16,11 @@ class LibrariesList extends Component {
             libraries: []
         };
 
-        this.selectResource = this._selectLibrary.bind(this);
+        this.selectLibrary = this._selectLibrary.bind(this);
     }
 
     _selectLibrary(event) {
-        const url = event.target.getAttribute('data-url');
+        const url = event.currentTarget.getAttribute('data-url');
         store.next(u({selectedLibrary: url}, store.value));
     }
 
@@ -38,7 +38,7 @@ class LibrariesList extends Component {
         return (
             <div>
                 {this.state.libraries.map(it => (
-                    <Media onClick={this.selectResource} key={it.url} data-url={it.url}>
+                    <Media onClick={this.selectLibrary} key={it.url} data-url={it.url}>
                         <Media.Left align="top">
                             <img width={64} height={64} src={it.thumb} alt={it.name}/>
                         </Media.Left>

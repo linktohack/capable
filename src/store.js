@@ -16,6 +16,8 @@ const store = new BehaviorSubject({
     selectedResource: undefined,
     libraries: [],
     selectedLibrary: undefined,
+    tracks: {},
+    selectedSubtitle: undefined
 });
 
 store.map(it => it.token)
@@ -63,5 +65,42 @@ store.map(it => it.selectedResource)
             });
     });
 
+store.map(it => it.selectedLibrary)
+    .distinctUntilChanged()
+    .subscribe(selectedLibrary => {
+        if (!selectedLibrary) {
+            return
+        }
+
+        Api.plex.metadata(selectedLibrary)
+            .map(it => it.MediaContainer.Video[0].Media[0].Part[0])
+            .map(it => {
+                const video = {
+                    url: `${store.value.selectedResource}${it.$.key}`
+                };
+                const thumb = it.$.thumb;
+                const srt = it.Stream
+                    .filter(it => it.$.streamType === "3" && it.$.format === "srt")
+                    .map(it => ({
+                        format: 'srt',
+                        language: it.$.language || 'Unknown',
+                        languageCode: it.$.languageCode || 'Unknown',
+                        url: `https://vtt.hyrule.me/srt?hash=${btoa(`${store.value.selectedResource}${it.$.key}?X-Plex-Token=${store.value.token}`)}`
+                    }));
+                const ass = it.Stream
+                    .filter(it => it.$.streamType === "3" && it.$.format === "ass")
+                    .map(it => ({
+                        format: 'srt',
+                        language: it.$.language || 'Unknown',
+                        languageCode: it.$.languageCode || 'Unknown',
+                        url: `https://vtt.hyrule.me/ass?hash=${btoa(`${store.value.selectedResource}${it.$.key}?X-Plex-Token=${store.value.token}`)}`
+                    }));
+                return {video, thumb, subtitles: [].concat(srt, ass)};
+            })
+            .do(it => console.log('track', it))
+            .subscribe(tracks => {
+                store.next(u({tracks}, store.value));
+            });
+    });
 
 export default store;
