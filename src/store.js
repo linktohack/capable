@@ -16,7 +16,9 @@ const store = new BehaviorSubject({
     selectedResource: undefined,
     libraries: [],
     selectedLibrary: undefined,
-    tracks: {}
+    tracks: {},
+    info: {},
+    error: {},
 });
 
 store.map(it => it.token)
@@ -30,7 +32,7 @@ store.map(it => it.token)
             .map(it => it.MediaContainer.Device
                 .filter(it => it.$.provides === 'server')
                 .map(it => {
-                    const conn = it.Connection.find(it => it.$.local === "0");
+                    const conn = it.Connection.filter(it => it.$.local === "0")[0];
                     return {
                         name: it.$.name,
                         url: conn.$.uri
@@ -38,7 +40,7 @@ store.map(it => it.token)
                 })
             )
             .subscribe(resources => {
-                store.next(u({resources}, store.value));
+                store.next(u({resources: resources}, store.value));
             });
     });
 
