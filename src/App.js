@@ -1,6 +1,10 @@
 import React, {Component} from "react";
 import {Col, Grid, Row} from "react-bootstrap";
 
+import {AutoSizer} from 'react-virtualized';
+
+import 'react-virtualized/styles.css';
+
 import u from "updeep";
 
 import "rxjs/add/operator/map";
@@ -44,38 +48,42 @@ class App extends Component {
 
     render() {
         return (
-            <Grid>
-                <Row>
-                    <Col xs={3}>
-                        { this.state.token
-                            ? (
+            <AutoSizer>
+                {({height, width}) => (
+                    <Grid style={{height, width}}>
+                        <Row>
+                            <Col xs={3}>
+                                {this.state.token
+                                    ? (
+                                        <Row>
+                                            <Col>
+                                                <LogoutForm/>
+                                            </Col>
+                                        </Row>
+                                    )
+                                    : (<Row>
+                                            <Col>
+                                                <LoginForm/>
+                                            </Col>
+                                        </Row>
+                                    )
+                                }
                                 <Row>
                                     <Col>
-                                        <LogoutForm />
+                                        <ResourcesList/>
                                     </Col>
                                 </Row>
-                            )
-                            : (<Row>
-                                    <Col>
-                                        <LoginForm />
-                                    </Col>
-                                </Row>
-                            )
-                        }
-                        <Row>
-                            <Col>
-                                <ResourcesList/>
+                            </Col>
+                            <Col xs={3}>
+                                <LibrariesList height={height} width={width/4}/>
+                            </Col>
+                            <Col xs={6}>
+                                <VideoPlayer/>
                             </Col>
                         </Row>
-                    </Col>
-                    <Col xs={3}>
-                        <LibrariesList/>
-                    </Col>
-                    <Col xs={6}>
-                        <VideoPlayer/>
-                    </Col>
-                </Row>
-            </Grid>
+                    </Grid>
+                )}
+            </AutoSizer>
         );
     }
 }
