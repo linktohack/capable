@@ -36,7 +36,7 @@ class LibrariesList extends Component {
 
     render() {
         return (
-            <div>
+            <div className="list-libraries">
                 {this.state.libraries.map(it => (
                     <Media onClick={this.selectLibrary} key={it.url} data-url={it.url}>
                         <Media.Left align="top">
