@@ -8,7 +8,7 @@
 
 @media (min-width: 992px) {
     .libraries-list {
-        max-height: calc(100vh - 2rem);
+        max-height: calc(100vh - 6rem - 3 * 39px);
 
     }
 

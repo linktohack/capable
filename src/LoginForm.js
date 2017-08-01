@@ -72,7 +72,7 @@ class LoginForm extends Component {
                     label="Password"
                     type="password"/>
 
-                <Button type="submit" onClick={this.login}>
+                <Button type="submit" onClick={this.login} className="pull-right">
                     Submit
                 </Button>
 

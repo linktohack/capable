@@ -42,11 +42,11 @@ class LibrariesList extends Component {
                 {this.state.libraries.map(it => (
                     <Media onClick={this.selectLibrary} key={it.url} data-url={it.url}>
                         <Media.Left align="top">
-                            <img width={64} height={64} src={it.thumb} alt={it.name}/>
+                            <img width={64} height={64} src={it.thumb} alt={it.title}/>
                         </Media.Left>
                         <Media.Body>
-                            <Media.Heading>{it.name}</Media.Heading>
-                            <p>{it.url}</p>
+                            <Media.Heading>{`${it.title} (${it.year})`}</Media.Heading>
+                            <p>{it.summary}</p>
                         </Media.Body>
                     </Media>
                 ))}

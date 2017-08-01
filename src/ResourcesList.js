@@ -42,7 +42,7 @@ class ResourcesList extends Component {
                 {this.state.resources.map(it => (
                     <Media onClick={this.selectResource} key={it.url} data-url={it.url}>
                         <Media.Left align="top">
-                            <img width={64} height={64} src="http://lorempixel.com/256/256" alt={it.name}/>
+                            <img width={64} height={64} src="http://via.placeholder.com/64x64" alt={it.name}/>
                         </Media.Left>
                         <Media.Body>
                             <Media.Heading>{it.name}</Media.Heading>

@@ -46,7 +46,17 @@ class App extends Component {
         return (
             <Grid>
                 <Row>
-                    <Col md={3}>
+                    <Col md={6}>
+                        <Row>
+                            <Col md={12}>
+                                <LibrariesList/>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={12}>
+                                <ResourcesList/>
+                            </Col>
+                        </Row>
                         {this.state.token && (
                             <Row>
                                 <Col md={12}>
@@ -59,14 +69,6 @@ class App extends Component {
                                 </Col>
                             </Row>
                         )}
-                        <Row>
-                            <Col md={12}>
-                                <ResourcesList/>
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col md={3}>
-                        <LibrariesList/>
                     </Col>
                     <Col md={6}>
                         <VideoPlayer/>

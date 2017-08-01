@@ -54,11 +54,10 @@ store.map(it => it.selectedResource)
         Api.plex.libraries(selectedResource)
             .map(it => it.MediaContainer.Video
                 .map(it => {
-                    return {
-                        name: it.$.title,
+                    return u({
                         thumb: `${store.value.selectedResource}${it.$.thumb}?X-Plex-Token=${store.value.token}`,
-                        url: `${store.value.selectedResource}${it.$.key}`
-                    }
+                        url: `${store.value.selectedResource}${it.$.key}`,
+                    }, it.$);
                 })
             )
             .subscribe(libraries => {
