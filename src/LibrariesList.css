@@ -1,0 +1,15 @@
+.libraries-list {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-height: 50vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+@media (min-width: 992px) {
+    .libraries-list {
+        max-height: calc(100vh - 2rem);
+
+    }
+
+}

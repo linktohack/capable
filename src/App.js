@@ -46,32 +46,29 @@ class App extends Component {
         return (
             <Grid>
                 <Row>
-                    <Col xs={3}>
-                        { this.state.token
-                            ? (
-                                <Row>
-                                    <Col>
-                                        <LogoutForm />
-                                    </Col>
-                                </Row>
-                            )
-                            : (<Row>
-                                    <Col>
-                                        <LoginForm />
-                                    </Col>
-                                </Row>
-                            )
-                        }
+                    <Col md={3}>
+                        {this.state.token && (
+                            <Row>
+                                <Col md={12}>
+                                    <LogoutForm/>
+                                </Col>
+                            </Row>
+                        ) || (<Row>
+                                <Col md={12}>
+                                    <LoginForm/>
+                                </Col>
+                            </Row>
+                        )}
                         <Row>
-                            <Col>
+                            <Col md={12}>
                                 <ResourcesList/>
                             </Col>
                         </Row>
                     </Col>
-                    <Col xs={3}>
+                    <Col md={3}>
                         <LibrariesList/>
                     </Col>
-                    <Col xs={6}>
+                    <Col md={6}>
                         <VideoPlayer/>
                     </Col>
                 </Row>

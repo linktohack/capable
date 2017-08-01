@@ -7,6 +7,8 @@ import u from "updeep";
 import Api from "./Api";
 import store from "./store";
 
+import './LoginForm.css';
+
 class LoginForm extends Component {
     constructor(props) {
         super(props);
@@ -14,6 +16,11 @@ class LoginForm extends Component {
         this.handleEmailChange = this._handleEmailChange.bind(this);
         this.handlePasswordChange = this._handlePasswordChange.bind(this);
         this.login = this._login.bind(this);
+
+        this.state = {
+            success: undefined,
+            danger: undefined
+        }
     }
 
     _handleEmailChange(event) {
@@ -30,10 +37,13 @@ class LoginForm extends Component {
         Api.plex.login(this.email, this.password)
             .map(it => it.user.authToken)
             .subscribe(token => {
-                    store.next(u({token: token}, store.value));
+                    this.setState(u({success: `Token is: ${token}`}));
                     Api.plex.token(token);
+                    store.next(u({token: token}, store.value));
                 },
-                it => console.error(it)
+                error => {
+                    this.setState(u({danger: `Error is: ${error}`}));
+                }
             )
     }
 
@@ -49,7 +59,7 @@ class LoginForm extends Component {
         }
 
         return (
-            <form>
+            <form className="login-form">
                 <FieldGroup
                     onChange={this.handleEmailChange}
                     id="formControlsEmail"
@@ -66,13 +76,17 @@ class LoginForm extends Component {
                     Submit
                 </Button>
 
-                <Alert bsStyle="success">
-                    <strong>Login success</strong> Token is Token
-                </Alert>
+                {this.state.success && (
+                    <Alert bsStyle="success">
+                        <strong>{this.state.success}</strong>
+                    </Alert>
+                )}
 
-                <Alert bsStyle="danger">
-                    <strong>Login failed</strong> Token is Token
-                </Alert>
+                {this.state.danger && (
+                    <Alert bsStyle="danger">
+                        <strong>{this.state.danger}</strong>
+                    </Alert>
+                )}
             </form>
         );
     }

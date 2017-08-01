@@ -6,6 +6,8 @@ import u from "updeep";
 
 import store from "./store";
 
+import './LibrariesList.css';
+
 class LibrariesList extends Component {
     composite = undefined;
 
@@ -36,7 +38,7 @@ class LibrariesList extends Component {
 
     render() {
         return (
-            <div className="list-libraries">
+            <div className="libraries-list">
                 {this.state.libraries.map(it => (
                     <Media onClick={this.selectLibrary} key={it.url} data-url={it.url}>
                         <Media.Left align="top">

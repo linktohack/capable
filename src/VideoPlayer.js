@@ -2,6 +2,8 @@ import React, {Component} from "react";
 
 import store from "./store";
 
+import './VideoPlayer.css'
+
 class VideoPlayer extends Component {
     composite = undefined;
 
@@ -22,9 +24,9 @@ class VideoPlayer extends Component {
 
     render() {
         return (
-            <div>
+            <div className="video-player">
                 {this.state.tracks && this.state.tracks.video && (
-                    <video width={640} height={360}
+                    <video width={'100%'}
                            key={this.state.tracks.video.url}
                            controls preload="metadata"
                            crossOrigin="anonymous"
