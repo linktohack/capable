@@ -1,0 +1,55 @@
+#+BEGIN_QUOTE
+Because your TV is capable, and it sounds like Cable TV, too :)
+https://capable.linktohack.com
+#+END_QUOTE
+
+* How
+
+  1. Login with your Plex account
+  2. Select a server
+  3. Select a movie and enjoy watching without waiting for conversion
+     etc. External subtitles are supported.
+
+  [[file:screenshot1.png]]
+  [[file:screenshot2.png]]
+
+* Limitations
+  - Remote access must be enable (for HTTPS to work)
+  - Builtin subtitles are not supported
+  - Audio channel selection is also not supported
+
+* Risk?
+  - The API & player itself are running in your browser
+  - Subtitles are proxied through https://vtt.linktohack.com *carrying
+    your access token*. The source code of =vtt= can be found here
+    https://github.com/linktohack/vtt
+
+* Credits
+  - Plex API Wiki: https://github.com/Arcanemagus/plex-api/wiki
+  - VTT Proxy: https://vtt.linktohack.com
+  - Create React App: https://github.com/facebookincubator/create-react-app
+  - React Bootstrap: https://react-bootstrap.github.io/components.html
+  - Superhero: https://bootswatch.com/superhero/
+
+* License
+  Copyright (c) <2017> Quang-Linh LE
+
+  Permission is hereby granted, free of charge, to any person
+  obtaining a copy of this software and associated documentation files
+  (the "Software"), to deal in the Software without restriction,
+  including without limitation the rights to use, copy, modify, merge,
+  publish, distribute, sublicense, and/or sell copies of the Software,
+  and to permit persons to whom the Software is furnished to do so,
+  subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+  BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+  ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.

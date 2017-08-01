@@ -26,7 +26,7 @@ class LogoutForm extends Component {
     render() {
         return (
             <form className="logout-form">
-                <Button type="submit" onClick={this.logout} className="pull-right">
+                <Button type="submit" onClick={this.logout} bsStyle="primary" className="pull-right">
                     Log out
                 </Button>
 

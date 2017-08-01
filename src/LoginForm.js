@@ -65,14 +65,15 @@ class LoginForm extends Component {
                     id="formControlsEmail"
                     type="email"
                     label="Email address"
-                    placeholder="Enter email"/>
+                    placeholder="Enter your plex email"/>
                 <FieldGroup
                     onChange={this.handlePasswordChange}
                     id="formControlsPassword"
                     label="Password"
-                    type="password"/>
+                    type="password"
+                    placeholder="Enter password"/>
 
-                <Button type="submit" onClick={this.login} className="pull-right">
+                <Button type="submit" onClick={this.login} bsStyle="primary" className="pull-right">
                     Submit
                 </Button>
 
