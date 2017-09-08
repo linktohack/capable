@@ -1,11 +1,10 @@
-import React, {Component} from "react";
-import {Alert, Button, ControlLabel, FormControl, FormGroup, HelpBlock} from "react-bootstrap";
+import React, { Component } from 'react';
+import { Alert, Button, ControlLabel, FormControl, FormGroup, HelpBlock } from 'react-bootstrap';
 
-import "rxjs/add/operator/map";
-import u from "updeep";
+import 'rxjs/add/operator/map';
 
-import Api from "./Api";
-import store from "./store";
+import Api from './Api';
+import { setResourcesForToken } from './action';
 
 import './LoginForm.css';
 
@@ -20,7 +19,7 @@ class LoginForm extends Component {
         this.state = {
             success: undefined,
             danger: undefined
-        }
+        };
     }
 
     _handleEmailChange(event) {
@@ -37,14 +36,14 @@ class LoginForm extends Component {
         Api.plex.login(this.email, this.password)
             .map(it => it.user.authToken)
             .subscribe(token => {
-                    this.setState(u({success: `Token is: ${token}`}));
+                    this.setState({success: `Token is: ${token}`});
                     Api.plex.token(token);
-                    store.next(u({token: token}, store.value));
+                    setResourcesForToken(token);
                 },
                 error => {
-                    this.setState(u({danger: `Error is: ${error}`}));
+                    this.setState({danger: `Error is: ${error}`});
                 }
-            )
+            );
     }
 
     render() {

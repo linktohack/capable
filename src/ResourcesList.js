@@ -1,10 +1,9 @@
-import React, {Component} from "react";
-import {Media} from "react-bootstrap";
-import "rxjs/add/operator/map";
+import React, { Component } from 'react';
+import { Media } from 'react-bootstrap';
+import 'rxjs/add/operator/map';
 
-import u from "updeep";
-
-import store from "./store";
+import store from './store';
+import { setLibrariesForResource } from './action';
 
 import './ResourcesList.css';
 
@@ -23,7 +22,7 @@ class ResourcesList extends Component {
 
     _selectResource(event) {
         const url = event.currentTarget.getAttribute('data-url');
-        store.next(u({selectedResource: url}, store.value));
+        setLibrariesForResource(url);
     }
 
     componentDidMount() {

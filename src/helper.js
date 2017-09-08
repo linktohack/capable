@@ -1,6 +1,6 @@
-import {Observable} from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 
-import {parseString} from "xml2js";
+import { parseString } from 'xml2js';
 
 function parseXml(xml) {
     return Observable.create(s => {
@@ -14,4 +14,4 @@ function parseXml(xml) {
     });
 }
 
-export {parseXml};
+export { parseXml };

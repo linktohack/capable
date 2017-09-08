@@ -1,10 +1,9 @@
-import React, {Component} from "react";
-import {Media} from "react-bootstrap";
-import "rxjs/add/operator/map";
+import React, { Component } from 'react';
+import { Media } from 'react-bootstrap';
+import 'rxjs/add/operator/map';
+import { setTrackForSelectedLibrary } from './action';
 
-import u from "updeep";
-
-import store from "./store";
+import store from './store';
 
 import './LibrariesList.css';
 
@@ -23,7 +22,7 @@ class LibrariesList extends Component {
 
     _selectLibrary(event) {
         const url = event.currentTarget.getAttribute('data-url');
-        store.next(u({selectedLibrary: url}, store.value));
+        setTrackForSelectedLibrary(url);
     }
 
     componentDidMount() {

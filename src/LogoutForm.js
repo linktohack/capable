@@ -1,8 +1,8 @@
-import React, {Component} from "react";
-import {Alert, Button} from "react-bootstrap";
+import React, { Component } from 'react';
+import { Alert, Button } from 'react-bootstrap';
 
-import Api from "./Api";
-import u from 'updeep';
+import Api from './Api';
+import { setResourcesForToken } from './action';
 
 import './LogoutForm.css';
 
@@ -15,12 +15,15 @@ class LogoutForm extends Component {
         this.state = {
             success: undefined,
             danger: undefined
-        }
+        };
     }
 
-    _logout() {
+    _logout(event) {
+        event.preventDefault();
+
         Api.plex.logout();
-        this.setState(u({success: 'Loggout success'}, this.state));
+        setResourcesForToken(null);
+        this.setState({success: 'Loggout success'});
     }
 
     render() {

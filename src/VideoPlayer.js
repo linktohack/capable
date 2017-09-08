@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, { Component } from 'react';
 
-import store from "./store";
+import store from './store';
 
-import './VideoPlayer.css'
+import './VideoPlayer.css';
 
 class VideoPlayer extends Component {
     composite = undefined;
@@ -42,8 +42,8 @@ class VideoPlayer extends Component {
                     </video>
                 )}
             </div>
-        )
+        );
     }
 }
 
-export default VideoPlayer
+export default VideoPlayer;

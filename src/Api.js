@@ -1,11 +1,11 @@
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/observable/fromPromise";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/filter";
-import "rxjs/add/operator/mergeMap";
-import "rxjs/add/operator/do";
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/do';
 
-import {parseXml} from "./helper";
+import { parseXml } from './helper';
 
 const Api = {
     plex: {
@@ -18,18 +18,18 @@ const Api = {
         },
 
         login(_login, password) {
-            const url = "https://plex.tv/users/sign_in.json";
+            const url = 'https://plex.tv/users/sign_in.json';
 
             const settings = {
-                "crossDomain": true,
-                "method": "POST",
-                "headers": {
-                    "Content-Type": "application/json",
-                    "x-plex-product": "a product",
-                    "x-plex-version": "a version",
-                    "x-plex-client-identifier": "a client"
+                'crossDomain': true,
+                'method': 'POST',
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'x-plex-product': 'a product',
+                    'x-plex-version': 'a version',
+                    'x-plex-client-identifier': 'a client'
                 },
-                "body": JSON.stringify({
+                'body': JSON.stringify({
                     user: {login: _login, password}
                 })
             };
@@ -42,13 +42,13 @@ const Api = {
         },
 
         resources() {
-            const url = "https://plex.tv/pms/resources.xml?includeHttps=1";
+            const url = 'https://plex.tv/pms/resources.xml?includeHttps=1';
 
             const settings = {
-                "crossDomain": true,
-                "method": "GET",
-                "headers": {
-                    "x-plex-token": this.token()
+                'crossDomain': true,
+                'method': 'GET',
+                'headers': {
+                    'x-plex-token': this.token()
                 }
             };
 
@@ -60,10 +60,10 @@ const Api = {
             const url = `${baseUrl}/library/sections/1/all`;
 
             const settings = {
-                "crossDomain": true,
-                "method": "GET",
-                "headers": {
-                    "x-plex-token": this.token()
+                'crossDomain': true,
+                'method': 'GET',
+                'headers': {
+                    'x-plex-token': this.token()
                 }
             };
 
@@ -73,10 +73,10 @@ const Api = {
 
         metadata(url) {
             const settings = {
-                "crossDomain": true,
-                "method": "GET",
-                "headers": {
-                    "x-plex-token": this.token()
+                'crossDomain': true,
+                'method': 'GET',
+                'headers': {
+                    'x-plex-token': this.token()
                 }
             };
 
